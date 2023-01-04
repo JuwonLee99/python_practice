@@ -54,9 +54,22 @@ class FlyableAttackUnit(AttackUnit, Flyable):
 
 
 # 건물관련 클래스 생성 (이름과 체력이 있고 공격받으면 파괴될 수 있음, 위치)
+# class BuildingUnit(Unit):
+#     def __init__(self, name, hp, location):
+#         Unit.__init__(self,name,hp,0)
+#         self.location = location
+
+        # pass # 아무것도 하지않고 일단 넘어간다는 의미로 사용/ 코드 완성되지 않아도 에러없이 프로그램 작동 가능
+
+# ------------------------------------------------------
+# super()를 통해서 부모 클래스의 이름을 직접 적지 않고 접근할 수 있음
 class BuildingUnit(Unit):
-    def __init__(self, name, hp, locartion):
-        pass # 아무것도 하지않고 일단 넘어간다는 의미로 사용/ 코드 완성되지 않아도 에러없이 프로그램 작동 가능
+    def __init__(self, name, hp, location):
+        super().__init__(name,hp,0) # self 없이 사용
+        self.location = location
+# ------------------------------------------------------
+# 다중 상속인 경우 super를 통해서 맨 앞에 오는 부모 클래스로만 접근하게됨
+# 따라서, 다중 상속인 경우에는 명시적으로 각 부모 클래스의 이름을 통해 접근해야함
 
 # 서플라이 디폿 생성 : 건물, 1개 건물 = 8 유닛
 supply_depot = BuildingUnit('서플라이 디폿', 500, '7시')
@@ -65,7 +78,8 @@ def game_start():
     print('[알림] 새로운 게임을 시작합니다.')
 
 def game_over():
-    pass
+    pass # pass를 통해 그냥 넘어감
+# 이외에 반복문이나 조건문에서도 pass를 통해 당장 세부 동작에 대한 정의를 하지않으 채로 두었다가 나중에 코드를 완성하도록 할 수 있음
 
 game_start()
 game_over()
